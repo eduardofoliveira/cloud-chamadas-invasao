@@ -1,0 +1,21 @@
+{
+  "name": "buscaInvasao",
+  "version": "1.0.0",
+  "description": "Buscar por quantidade de chamadas em busca de invasão",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cloud",
+    "basix"
+  ],
+  "author": "Eduardo F Oliveira",
+  "license": "MIT",
+  "dependencies": {
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "node-cron": "^1.2.1",
+    "nodemailer": "^4.6.4"
+  }
+}
