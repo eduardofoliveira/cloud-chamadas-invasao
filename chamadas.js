@@ -19,7 +19,7 @@ const buscar = async (quantidade) => {
 	    cdrs
     where
 	    accountid in (select id from accounts where type = 0 and deleted = 0 and reseller_id = 0 and id not in (14, 16, 46, 55, 57, 60)) and
-	    callstart >= CONVERT_TZ( now(), '+00:00','+02:00') - INTERVAL 1 HOUR and
+	    callstart >= CONVERT_TZ( now(), '+00:00','+03:00') - INTERVAL 1 HOUR and
 	    billmsec > 1
     group by
 	    callerid, pattern

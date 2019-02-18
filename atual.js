@@ -2,15 +2,15 @@ const cron = require('node-cron')
 
 let executar = async () => {
     let chamadas = require('./chamadas')
-    let connection = require('./service/mysql/connection')
+    //let connection = require('./service/mysql/connection')
     let email = require('./email')
 
     ligacoes = await chamadas.buscar(1)
     ligacoes.map(item => {return item[1] = item[1].replace('^', '').replace('.*', '')})
 
-    if(ligacoes.length >= 1){
-        await connection.cdrs().inserirLista(ligacoes)
-    }
+    //if(ligacoes.length >= 1){
+    //    await connection.cdrs().inserirLista(ligacoes)
+    //}
 
     let enviar = false
     let corpo = ''
@@ -32,7 +32,7 @@ let executar = async () => {
     }
 
     chamadas = undefined
-    connection = undefined
+    //connection = undefined
     email = undefined
 }
 
