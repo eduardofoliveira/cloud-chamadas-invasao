@@ -37,6 +37,7 @@ let verificarChamadasSimultaneas = () => {
 
     chamadas = undefined
     email = undefined
+    ligacoes = undefined
     resolve()
   })
 }
@@ -65,12 +66,18 @@ let verificarChamadasInternacionais = () => {
       })
       chamadas.bloquearChamadasInternacionais()
     }
+    chamadas = undefined
+    email = undefined
     resolve()
   })
 }
 
 cron.schedule('0 * * * *', async () => {
-  await verificarChamadasSimultaneas()
-  await verificarChamadasInternacionais()
-  await require('./service/mysql').fecharConexao()
+  try {
+    await verificarChamadasSimultaneas()
+    await verificarChamadasInternacionais()
+  } catch (error) {
+    console.log('Erro no cron.schedule')
+    console.log(error)
+  }
 })

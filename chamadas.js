@@ -1,7 +1,8 @@
 const buscarListaChamadas = async quantidade => {
-  const connection = await require('./service/mysql').connection
+  try {
+    const connection = await require('./service/mysql')()
 
-  const [rows] = await connection.execute(`
+    const [rows] = await connection.execute(`
     select
         callerid,
         pattern,
@@ -17,22 +18,29 @@ const buscarListaChamadas = async quantidade => {
     order by
         quantidade desc, pattern asc`)
 
-  let lista = []
+    connection.close()
 
-  rows.map(item => {
-    if (item.quantidade >= quantidade) {
-      item.callerid = item.callerid.match('<(.*)>')[1]
-      lista.push([item.callerid, item.pattern, item.quantidade])
-    }
-  })
+    let lista = []
 
-  return lista
+    rows.map(item => {
+      if (item.quantidade >= quantidade) {
+        item.callerid = item.callerid.match('<(.*)>')[1]
+        lista.push([item.callerid, item.pattern, item.quantidade])
+      }
+    })
+
+    return lista
+  } catch (error) {
+    console.log('Erro no metodo: buscarListaChamadas')
+    console.log(error)
+  }
 }
 
 const custoChamadasInternacionais = async () => {
-  const connection = await require('./service/mysql').connection
+  try {
+    const connection = await require('./service/mysql')()
 
-  const [[rows]] = await connection.execute(`
+    const [[rows]] = await connection.execute(`
     SELECT
         sum(cost) as custo
     FROM
@@ -43,19 +51,32 @@ const custoChamadasInternacionais = async () => {
         callednum LIKE '010%' and
         cost > 0`)
 
-  return rows
+    connection.close()
+
+    return rows
+  } catch (error) {
+    console.log('Erro no metodo: custoChamadasInternacionais')
+    console.log(error)
+  }
 }
 
 const bloquearChamadasInternacionais = async () => {
-  const connection = await require('./service/mysql').connection
+  try {
+    const connection = await require('./service/mysql')()
 
-  await connection.execute(`
+    await connection.execute(`
     UPDATE
       trunks
     SET
       STATUS = 1
     WHERE
       id IN (55, 57)`)
+
+    connection.close()
+  } catch (error) {
+    console.log('Erro no metodo: bloquearChamadasInternacionais')
+    console.log(error)
+  }
 }
 
 module.exports = {
