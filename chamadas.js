@@ -18,7 +18,7 @@ const buscarListaChamadas = async quantidade => {
     order by
         quantidade desc, pattern asc`)
 
-    connection.close()
+    connection.end()
 
     let lista = []
 
@@ -51,7 +51,7 @@ const custoChamadasInternacionais = async () => {
         callednum LIKE '010%' and
         cost > 0`)
 
-    connection.close()
+    connection.end()
 
     return rows
   } catch (error) {
@@ -72,7 +72,7 @@ const bloquearChamadasInternacionais = async () => {
     WHERE
       id IN (55, 57)`)
 
-    connection.close()
+    connection.end()
   } catch (error) {
     console.log('Erro no metodo: bloquearChamadasInternacionais')
     console.log(error)
