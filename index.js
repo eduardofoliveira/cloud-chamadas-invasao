@@ -49,7 +49,7 @@ let verificarChamadasInternacionais = () => {
 
     let { custo } = await chamadas.custoChamadasInternacionais()
 
-    if (custo >= 50 && custo <= 99.99) {
+    if (custo >= 100 && custo <= 149.99) {
       email.enviar({
         titulo: 'Warning valor das chamadas internacionais acima do normal',
         corpo: `O custo atual das chamadas internacionais nas ultimas 24 horas alcançou ${custo}`,
@@ -57,7 +57,7 @@ let verificarChamadasInternacionais = () => {
           'suporte.basix@cloudcom.com.br, eduardo_felipe_oliveira@yahoo.com.br'
       })
     }
-    if (custo >= 100) {
+    if (custo >= 150) {
       email.enviar({
         titulo: 'Provavel invasão verifique as terminações internacionais',
         corpo: `O custo atual das chamadas internacionais nas ultimas 24 horas alcançou ${custo}`,
