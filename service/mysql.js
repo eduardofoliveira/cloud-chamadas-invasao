@@ -3,7 +3,7 @@ let getConnection = () => {
 
   const connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
-    socketPath: = process.env.MYSQL_SOCKET,
+    socketPath: process.env.MYSQL_SOCKET,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DATABASE
